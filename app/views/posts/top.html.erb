@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cinema Reviews</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/0d2d15ef3c.js" crossorigin="anonymous"></script>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" type="text/css" href="./top.css">
+  </head>
+
+  <body class="top">
+    <div class="center">
+      <img src="/assets/top1.jpg" class="img2" id="topimg">
+      <span>
+        <h4>映画"館"を探せるレビューサイト</h4>
+        <h1 class="title">cinema reviews</h1>
+      </span>
+    </div>
+
+    <br><br>
+    <h2 class="black">あれ？</h2><br>
+    <ul class="container">
+      <li>友達と遊びに来たけど<br>映画館以外の施設が<br>無さすぎる</li>
+      <li>どこの売店も<br>ポップコーン<br>ばっかり</li>
+      <li>座席が硬くて<br>映画に集中<br>できない</li>
+    </ul>
+
+    <h2 class="black">そんな「映画館」に関するお悩み<br>感じたことはありませんか？</h2>
+
+    <div class="center">
+      <img src="/assets/top2.jpg" class="img2">
+      <span><h1>ここは<br>映画館の情報を<br>探せるサイト</h1></span>
+    </div>
+
+    <div class="center">
+      <img src="/assets/top3.jpg" class="img2">
+      <span>
+        <ul class="container up">
+          <li class="term">一緒に行く人</li>
+          <li class="term">立地</li>
+          <li class="term">観たい映画</li>
+        </ul>
+        <img src="/assets/fukidashi1.png" id="fukidashi">
+        <h2 class="red">条件にぴったりの映画館を<br>見つけよう！</h2>
+      </span>
+    </div>
+
+    <h3><%= link_to "みんなのレビューを見る", posts_path %></h3>
+
+  </body>
+</html>

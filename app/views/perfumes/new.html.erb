@@ -1,0 +1,36 @@
+<%= form_with model:@perfume, local: true do |f| %>
+  <div class="container-sindan">
+    <div class="row">
+      <div class="col-12">
+        <p>Question1. 誰と見にいきますか？</p>
+      </div>
+      <div class="col-6">
+        <%= f.radio_button :question1, "1" %><%= f.label :question1_1, "一人で" %>
+      </div>
+      <div class="col-6">
+        <%= f.radio_button :question1, "2" %><%= f.label :question1_2, "友人と" %>
+      </div>
+      <div class="col-6">
+        <%= f.radio_button :question1, "3" %><%= f.label :question1_3, "家族と" %>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <p>Question2. 希望はどの辺り？</p>
+    </div>
+    <div class="col-6">
+      <%= f.radio_button :question2, "1" %><%= f.label :question2_1, "東京" %>
+    </div>
+    <div class="col-6">
+      <%= f.radio_button :question2, "2" %><%= f.label :question2_2, "神奈川" %>
+    </div>
+    <div class="col-6">
+      <%= f.radio_button :question2, "3" %><%= f.label :question2_3, "こだわらない" %>
+    </div>
+  </div>
+
+  <div class="sindanbotan">
+    <%= f.submit "診断する！" %>
+  </div>
+  <%= link_to "前ページへ戻る", perfumes_path, class: "link" %>
+<% end %>

@@ -1,0 +1,128 @@
+<body onload="initMap(), codeAddress()">
+<h3>感想詳細</h3>
+<div class="post">
+  <p><%= link_to @post.user.name, user_path(@post.user.id) %>さん</p>
+  <p><%= @post.created_at %></p>
+  <h1 style="color: red;"><%= @post.name %></h1>
+  <h4><%= @post.title %></h4>
+  <p>ジャンル：<%= @post.genre %></p>
+
+  <input type="hidden" id="address" value="<%= @post.name %>">
+    <div id='map'></div>
+    <style>
+      #map {
+        height: 300px;
+        width: 300px;
+      }
+    </style>
+    <script></script>
+    </div>
+
+  <ul style="list-style: none;">
+  <li>清潔さ：<%= @post.clean %></li>
+  <li>音響の良さ：<%= @post.volume %></li>
+  <li>座席の快適さ：<%= @post.seat %></li>
+  <li>売店の充実度：<%= @post.shop %></li>
+  </ul>
+  <p><%= @post.about %></p>
+  <%= image_tag @post.image_url, size: "250x200" if @post.image? %>
+
+    <% if user_signed_in? %>
+      <% if current_user.id == @post.user_id%>
+        <%= button_to "投稿を削除する", post_path(@post.id), method: :delete %>
+      <% end %>
+      <% if current_user.already_liked?(@post) %>
+        <%= button_to post_like_path(@post), method: :delete do %>
+          <i class="fas fa-heart fa-3x" style="color:red;"></i>
+          <%= @post.likes.count %>
+        <% end %>
+      <% else %>
+        <%= button_to post_likes_path(@post), method: :post do %>
+        <i class="fa-regular fa-heart fa-3x" style="color:red;"></i>
+          <%= @post.likes.count %>
+        <% end %>
+      <% end %>
+      <i class="fa-regular fa-comment fa-3x"></i>
+      <%= @post.comments.count %>
+    <% end %>
+</div>
+
+<div class="comment-wrapper">
+  <% @comments.each do |c| %>
+    <div>
+      <p><%= c.user.name %>さん <%= c.created_at %></p>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@post, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "映画館一覧に戻る", posts_path %>
+</body>
+
+
+<%# 以下GoogleMap %>
+<script>
+//初期マップの設定
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: 35.6803997, lng:139.7690174},  //東京
+    zoom: 15,
+    
+  });
+}
+
+//検索後のマップ作成
+let geocoder
+let aft
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+        //マーカーが複数できないようにする
+        if (aft == true){
+            marker.setMap(null);
+        }
+
+        //新しくマーカーを作成する
+        map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            draggable: true	// ドラッグ可能にする
+        });
+
+        //二度目以降か判断
+        aft = true
+
+        //検索した時に緯度経度を入力する
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng();
+
+        // マーカーのドロップ（ドラッグ終了）時のイベント
+        google.maps.event.addListener( marker, 'dragend', function(ev){
+            // イベントの引数evの、プロパティ.latLngが緯度経度
+            document.getElementById('lat').value = ev.latLng.lat();
+            document.getElementById('lng').value = ev.latLng.lng();
+        });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVvcvg1ms6uYh2j5-atzKZw4omelXeOlM&callback=initMap" async defer></script>

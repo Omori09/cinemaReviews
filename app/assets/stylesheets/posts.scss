@@ -1,0 +1,201 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+//topページ
+.top {
+  text-align: center;
+  background-image: url(top_background.jpg);
+  background-size: cover;
+  line-height: 2.5;
+}
+
+.img2 {
+  opacity: 0.7;
+  width: 640px;
+  height: 427px;
+  vertical-align: bottom;
+}
+
+#topimg {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  font-size: 300%;
+}
+
+.center {
+  position: relative;
+}
+
+.center span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 1px 2px 3px #4c4c4c;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  list-style: none;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  background: white;
+}
+
+#fukidashi img {
+  position: absolute;
+  z-index: 30;
+  opacity: 1.0;
+
+}
+
+.term {
+  background: #ffe070;
+  color: #4c4c4c;
+  text-shadow: none;
+}
+
+.up {
+  position: float;
+  top: 5px;
+}
+
+.black {
+  color: #4c4c4c;
+  text-shadow: none;
+}
+
+.red {
+  color: red;
+  position: absolute;
+  left: 22%;
+  top: 41%;
+  text-shadow: none;
+}
+
+
+
+//indexページ
+.index {
+  text-align: center;
+  background-color: #ffebb0;
+  z-index: -1;
+  line-height: 2.5;
+}
+
+.curtain {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  top: -75px;
+  z-index: 5;
+}
+
+.btnLike {
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+  /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  background: transparent;
+  border-radius: 25px;
+  outline: none;
+  /*アニメーションの指定*/
+  transition: all 0.2s ease;
+}
+
+.no-underline {
+  text-decoration: none;
+  color: red;
+}
+
+.btnLike:hover {
+  border-color: transparent;
+}
+
+.btnLike span {
+  position: relative;
+  z-index: 2;
+  /*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  /*テキストの形状*/
+  display: block;
+  padding: 10px 30px;
+  background: #fff;
+  border-radius: 25px;
+  color: #4c4c4c;
+  /*アニメーションの指定*/
+  transition: all 0.3s ease;
+}
+
+.pushdown:before {
+  content: "";
+  /*絶対配置で影の位置を決める*/
+  position: absolute;
+  z-index: -1;
+  top: 7px;
+  left: 0;
+  /*影の形状*/
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  background-color: #4c4c4c;
+}
+
+/*hoverの際にY軸に4pxずらす*/
+.pushdown:hover span {
+  background-color: #4c4c4c;
+  color: #fff;
+  transform: translateY(4px);
+}
+
+
+.search {
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.srcbox {
+  height: 50px;
+  padding: 0 10px;
+  border-radius: 25px 0px 0px 25px;
+  outline: 0;
+  background: white;
+  border: none;
+}
+
+.srcbtn {
+  height: 50px;
+  width: 50px;
+  background: #7fbfff;
+  color: #fff;
+  border: none;
+  border-radius: 0 25px 25px 0;
+}
+
+.srcbtn:hover {
+  color: #888;
+}
+
+.posts-container {
+  padding: 2em;
+  display: flex;
+}
+
+.post {
+  border: 2px solid #4c4c4c;
+  margin: 10px;
+}

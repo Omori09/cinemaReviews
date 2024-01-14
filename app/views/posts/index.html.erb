@@ -1,0 +1,46 @@
+<img src="assets/index_background.png" class="curtain">
+
+<body class="index">
+<h1 class="title">みんなの投稿</h1><br>
+<h3 class="btnLike pushdown"><span><i class="fa-solid fa-plus fa-lg" style="color:red"></i><%= link_to "投稿", new_post_path, :class=>"no-underline" %></span></h3>
+
+  <form class="search"><%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
+  <%= text_field_tag :search, '', {:class=>"srcbox"} %>
+  <%= submit_tag '検索' , :class=>"srcbtn" %>
+  <% end %></form>
+
+<div class="posts-container">
+  <% @posts.each do |t| %>
+    <div class="post">
+      <h4><i class="fa-solid fa-location-dot fa-lg" style=" color:red"></i><%= t.name %></h4>
+      <p><%= image_tag t.image_url, size: "250x200" if t.image? %></p>
+      <h5><i class="fa-solid fa-clapperboard"></i> <%= t.title %></h5><h6><%= t.genre %></h6>
+
+      <%if t.about.length > 50 %>
+        <p><%= t.about.truncate(50)%></p>
+      <% else %>
+        <p><%= t.about %></p>
+      <% end %>
+      <%= link_to "もっと見る", post_path(t.id) %>
+
+      <% if user_signed_in? %>
+        <% if current_user.already_liked?(t) %>
+        <%# いいね済み %>
+          <%= button_to post_like_path(id: t.id, post_id: t.id), method: :delete do %>
+          <i class="fas fa-heart fa-lg" style="color:red;"></i>
+          <%= t.likes.count %>
+        <% end %>
+        <% else %>
+        <%# いいね前 %>
+          <%= button_to post_likes_path(id: t.id, post_id: t.id), method: :post do %>
+            <i class="fa-regular fa-heart fa-lg" style="color:red;"></i>
+            <%= t.likes.count %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <br>
+  <% end %>
+
+</div>
+</body>

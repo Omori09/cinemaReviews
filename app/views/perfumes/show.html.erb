@@ -1,0 +1,165 @@
+<body onload="initMap(), codeAddress()">
+<div class="intoro">
+  <h5>診断結果</h5>
+  <p>あなたにおすすめの映画館は……</p>
+</div>
+<div class="post-container">
+    <div class="post">
+      <input type="hidden" id="address" value="仮">
+      <% if @perfume.question1 == "1" && @perfume.question2 == "1" %>
+      <span>
+        <a href="https://www.nfaj.go.jp/"><h2>国立映画アーカイブ</h2></a>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "国立映画アーカイブ";
+        </script>
+          <p>日本で唯一の国立映画専門機関</p>
+          <p>名作をお手頃価格で観られる</p>
+        </ul>
+      </span>
+
+      <% elsif @perfume.question1 == "1" && @perfume.question2 == "2" %>
+        <h2><a href="https://atsuginoeigakan-kiki.com/">あつぎのえいがかんkiki</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "あつぎのえいがかんkiki";
+        </script>
+        <p>上映する映画を選ぶセンスが抜群</p>
+        <p>上映頻度が高い</p>
+
+      <% elsif @perfume.question1 == "1" && @perfume.question2 == "3" %>
+        <h2><a href="https://tjoy.jp/t-joy_soga">T・ジョイ蘇我</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "T・ジョイ蘇我";
+        </script>
+        <p>魅力的なプライベートルームが存在</p>
+        <p>無料シャトルバスで行けるので映画以外の出費が抑えられる</p>
+
+      <% elsif @perfume.question1 == "2" && @perfume.question2 == "1" %>
+        <h2><a href="https://109cinemas.net/grandberrypark/">109シネマズ グランベリーパーク</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "109シネマズ グランベリーパーク";
+        </script>
+        <p>都内最大級のアウトレット複合施設内の映画館</p>
+        <p>映画チケットで施設の割引も</p>
+
+      <% elsif @perfume.question1 == "2" && @perfume.question2 == "2" %>
+        <h2><a href="https://cinecitta.co.jp/">チネチッタ</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "チネチッタ";
+        </script>
+        <p>イタリアのヒルタウンをモチーフに作られたエンタテイメントの街「ラ チッタデッラ」の一角</p>
+        <p>購入できる飲食物のレパートリーが多い</p>
+
+      <% elsif @perfume.question1 == "2" && @perfume.question2 == "3" %>
+        <h2><a href="https://cinemacity.co.jp/">立川シネマシティ</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "立川シネマシティ";
+        </script>
+        <p>チャレンジ精神旺盛な映画館</p>
+        <p>周辺にはおしゃれなお店が立ち並ぶ</p>
+
+      <% elsif @perfume.question1 == "3" && @perfume.question2 == "1" %>
+        <h2><a href="https://hlo.tohotheater.jp/net/schedule/043/TNPI2000J01.do">TOHOシネマズ 渋谷</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "TOHOシネマズ 渋谷";
+        </script>
+        <p>駐車場有のため都会でも快適</p>
+        <p>チェーン店なので映画のラインナップが豊富</p>
+
+      <% elsif @perfume.question1 == "3" && @perfume.question2 == "2" %>
+        <h2><a href="https://hlo.tohotheater.jp/net/schedule/036/TNPI2000J01.do">TOHOシネマズ ららぽーと横浜</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "TOHOシネマズ ららぽーと横浜";
+        </script>
+        <p>家族に人気の商業施設内にある</p>
+        <p>上映前の待ち時間は入り口すぐのガチャガチャで楽しめる</p>
+
+      <% elsif @perfume.question1 == "3" && @perfume.question2 == "3" %>
+        <h2><a href="https://www.ct-21.jp/">ネティアラ21</a></h2>
+        <script>
+            var address = document.getElementById("address");
+            address.value = "ネティアラ21";
+        </script>
+        <p>駅近でアクセスが良い</p>
+        <p>全席ワイドシートで目に優しいスクリーン</p>
+      <% end %>
+
+      <p>アクセス</p>
+      <div id='map'></div>
+        <style>
+          #map {
+            height: 300px;
+            width: 300px;
+          }
+        </style>
+      </div>
+
+      <%= link_to "もう一度診断する！", new_perfume_path, class: "link" %>
+</div>
+</body>
+
+
+<%# 以下GoogleMap %>
+<script>
+//初期マップの設定
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: 35.6803997, lng:139.7690174},  //東京
+    zoom: 15,
+    
+  });
+}
+
+//検索後のマップ作成
+let geocoder
+let aft
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+  console.log(inputAddress);
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+        //マーカーが複数できないようにする
+        if (aft == true){
+            marker.setMap(null);
+        }
+
+        //新しくマーカーを作成する
+        map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            draggable: true	// ドラッグ可能にする
+        });
+
+        //二度目以降か判断
+        aft = true
+
+        //検索した時に緯度経度を入力する
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng();
+
+        // マーカーのドロップ（ドラッグ終了）時のイベント
+        google.maps.event.addListener( marker, 'dragend', function(ev){
+            // イベントの引数evの、プロパティ.latLngが緯度経度
+            document.getElementById('lat').value = ev.latLng.lat();
+            document.getElementById('lng').value = ev.latLng.lng();
+        });
+    } else {
+      alert('地図を表示できません：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVvcvg1ms6uYh2j5-atzKZw4omelXeOlM&callback=initMap" async defer></script>

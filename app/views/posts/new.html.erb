@@ -1,0 +1,142 @@
+<h3>映画館をレビュー</h3>
+<%= form_for @posts do |f| %>
+
+<%= f.hidden_field :user_name, :value => current_user.name %>
+
+<div class="field">
+
+<%= f.hidden_field :name, html_options = {id: 'address'} %>
+<input id="address_temp" type="textbox" placeholder="映画館名を入力">
+<input type="button" value="検索" onclick="codeAddress(); register()">
+    
+    <div id='map'></div>
+    <style>
+    #map {
+        height: 300px;
+        width: 300px;
+    }
+    </style>
+</div>
+
+<div class="field">
+  <%= f.label :鑑賞映画タイトル %>
+  <%= f.text_field :title, :size => 30 %>
+</div>
+
+<div class="field">
+  <%= f.label :映画ジャンル  %>
+  <%= f.select :genre, 
+  [["SF", "SF"], 
+  ["アクション", "アクション"], 
+  ["アドベンチャー", "アドベンチャー"],
+  ["ミステリー", "ミステリー"],
+  ["ホラー", "ホラー"],
+  ["サスペンス", "サスペンス"], 
+  ["戦争", "戦争"],
+  ["ファンタジー", "ファンタジー"], 
+  ["コメディ", "コメディ"], 
+  ["恋愛", "恋愛"],
+  ["ファミリー", "ファミリー"],  
+  ["ミュージカル", "ミュージカル"], 
+  ["その他", "その他"]], include_blank: "選択して下さい" %>
+</div>
+
+#10段階で映画館を評価
+<div class="field">
+  <%= f.label :清潔さ %>
+  <%= f.number_field :clean, :size => 10, min:1, max:10 %>
+</div>
+
+<div class="field">
+  <%= f.label :音響の良さ %>
+  <%= f.number_field :volume, :size => 10, min:1, max:10 %>
+</div>
+
+<div class="field">
+  <%= f.label :座席の快適さ %>
+  <%= f.number_field :seat, :size => 10, min:1, max:10 %>
+</div>
+
+<div class="field">
+  <%= f.label :売店の充実度 %>
+  <%= f.number_field :shop, :size => 10, min:1, max:10 %>
+</div>
+
+<div class="about">
+  <%= f.label :レビュー %>
+  <%= f.text_area :about, :size => "30x2" %>
+</div>
+
+<div class="field">
+  <%= f.label :映画館の画像 %>
+  <%= f.file_field :image %>
+</div>
+
+<%= f.button '投稿する', type: 'button', onclick: 'submit();' %>
+<% end %>
+
+<%= link_to "映画館一覧に戻る", posts_path %>
+
+<script>
+//初期マップの設定
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: 35.6803997, lng:139.7690174},  //東京
+    zoom: 15,
+    
+  });
+}
+
+//検索後のマップ作成
+let geocoder
+let aft
+function codeAddress(){
+  let inputAddress = document.getElementById('address_temp').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+        //マーカーが複数できないようにする
+        if (aft == true){
+            marker.setMap(null);
+        }
+
+        //新しくマーカーを作成する
+        map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            draggable: true	// ドラッグ可能にする
+        });
+
+        //二度目以降か判断
+        aft = true
+
+        //検索した時に緯度経度を入力する
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng();
+
+        // マーカーのドロップ（ドラッグ終了）時のイベント
+        google.maps.event.addListener( marker, 'dragend', function(ev){
+            // イベントの引数evの、プロパティ.latLngが緯度経度
+            document.getElementById('lat').value = ev.latLng.lat();
+            document.getElementById('lng').value = ev.latLng.lng();
+        });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVvcvg1ms6uYh2j5-atzKZw4omelXeOlM&callback=initMap" async defer></script>
+
+<script>
+  function register(){
+    var map = document.getElementById("address_temp");
+    var rails = document.getElementById("address");
+  rails.value = map.value;
+  }
+</script>
