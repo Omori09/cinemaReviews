@@ -57,6 +57,11 @@
           loading.classList.add('hide');
         }, 1000);
       });
+      window.on('turbolinks:request-start', function() {
+        setTimeout(function() {
+          loading.classList.add('hide');
+        }, 1000);
+      });
     </script>
       <%= yield %>
     </main>
