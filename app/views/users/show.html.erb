@@ -4,7 +4,7 @@
   <% if @user.image? %>
     <%= image_tag @user.image_url, :class=>"prfImg"%> 
   <% else %>
-    <img src="/assets/noimage.png" class="prfImg">
+    <%= image_tag "noimage.png" :class=>"prfImg" %>
   <% end %>
 
   <div class="basicTxt">

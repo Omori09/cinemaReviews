@@ -26,7 +26,7 @@
       <% if t.image? %>
         <%= image_tag t.image_url, :style => "width: 277px" %>
       <% else %>
-        <img src="/assets/noimage.png" width="277px">
+        <%= image_tag "noimage.png", style: "width:277px" %>
       <% end %>
       <h5><i class="fa-solid fa-clapperboard"></i> <%= t.title %></h5><h6><%= t.genre %></h6>
 
