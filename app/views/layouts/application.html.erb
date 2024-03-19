@@ -57,7 +57,7 @@
       //     loading.classList.add('hide');
       //   }, 1000);
       // });
-      window.on('turbolinks:request-start', function() {
+      window.on('turbolinks:load', function() {
         setTimeout(function() {
           loading.classList.add('hide');
         }, 1000);
