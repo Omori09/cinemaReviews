@@ -45,24 +45,7 @@
     </header>
       
     <main>
-    <div class="loading">
-      <div class="loading-wrap">
-        <%= image_tag "eishakigif.gif" %>
-      </div>
-    </div>
-    <script>
-      const loading = document.querySelector('.loading');
-      // window.addEventListener('DOMContentLoaded', () => {
-      //   setTimeout(function() {
-      //     loading.classList.add('hide');
-      //   }, 1000);
-      // });
-      window.on('turbolinks:load', function() {
-        setTimeout(function() {
-          loading.classList.add('hide');
-        }, 1000);
-      });
-    </script>
+
       <%= yield %>
     </main>
 </body>
