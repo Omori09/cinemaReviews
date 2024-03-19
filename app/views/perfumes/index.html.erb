@@ -5,14 +5,14 @@
         <title>diagnosis</title>
     </head>
 
-    <body>
-        <header>
-            <h1>あなたにピッタリの映画館は？@関東</h1>
-        </header>
+    <body class="perfumes">
+    <div class="perfume_box">
+        <h3>あなたにピッタリの映画館は？@関東</h3><br>
 
         <div class="start">
-            <%= link_to "診断を始める", new_perfume_path, class: "link" %>
-        </div>
+            <%= link_to "診断を始める", new_perfume_path, :class=>"shine" %>
+        </div><br>
 
-        <%= link_to "映画館一覧に戻る", posts_path %>
+        <%= link_to "映画館一覧に戻る", posts_path ,:class=>"perfume_link" %>
+        </div>
     </body>

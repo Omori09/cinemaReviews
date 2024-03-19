@@ -1,46 +1,62 @@
-<img src="assets/index_background.png" class="curtain">
-
 <body class="index">
-<h1 class="title">みんなの投稿</h1><br>
-<h3 class="btnLike pushdown"><span><i class="fa-solid fa-plus fa-lg" style="color:red"></i><%= link_to "投稿", new_post_path, :class=>"no-underline" %></span></h3>
+<img src="assets/index_background.png" class="curtain">
+<div class="srcbg">
+<h1 class="title">みんなの投稿</h1>
+<h3 class="btnLike pushdown">
+<%= link_to new_post_path, :class=>"no-underline" do %>
+  <i class="fa-solid fa-plus fa-lg fa-bounce" ></i>
+  投稿
+<% end %>
+</h3>
 
-  <form class="search"><%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
-  <%= text_field_tag :search, '', {:class=>"srcbox"} %>
-  <%= submit_tag '検索' , :class=>"srcbtn" %>
-  <% end %></form>
+  <form class="search">
+    <p>キーワードで検索</p><%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
+      <%= text_field_tag :search, '', {:class=>"srcbox"} %>
+      <%= button_tag :type => "submit", :class =>"srcbtn" do %>
+  <i class="fa fa-search" style="color: white"></i>
+    <% end %>
+  <%end%>
+</form>
+</div>
 
 <div class="posts-container">
   <% @posts.each do |t| %>
     <div class="post">
-      <h4><i class="fa-solid fa-location-dot fa-lg" style=" color:red"></i><%= t.name %></h4>
-      <p><%= image_tag t.image_url, size: "250x200" if t.image? %></p>
+      <h4 class="theater"><i class="fa-solid fa-location-dot fa-lg" style=" color:red"></i><%= t.name %></h4>
+      <% if t.image? %>
+        <%= image_tag t.image_url, :style => "width: 277px" %>
+      <% else %>
+        <img src="/assets/noimage.png" width="277px">
+      <% end %>
       <h5><i class="fa-solid fa-clapperboard"></i> <%= t.title %></h5><h6><%= t.genre %></h6>
 
-      <%if t.about.length > 50 %>
-        <p><%= t.about.truncate(50)%></p>
-      <% else %>
-        <p><%= t.about %></p>
-      <% end %>
+      <p class="about"><%= t.about %></p>
       <%= link_to "もっと見る", post_path(t.id) %>
 
+      <div class="reaction">
       <% if user_signed_in? %>
         <% if current_user.already_liked?(t) %>
         <%# いいね済み %>
-          <%= button_to post_like_path(id: t.id, post_id: t.id), method: :delete do %>
-          <i class="fas fa-heart fa-lg" style="color:red;"></i>
-          <%= t.likes.count %>
+          <%= button_to post_like_path(id: t.id, post_id: t.id), method: :delete, :class=>"heart" do %>
+          <i class="fas fa-heart" style="color:red;"></i>
+          <p><%= t.likes.count %></p>
         <% end %>
         <% else %>
         <%# いいね前 %>
-          <%= button_to post_likes_path(id: t.id, post_id: t.id), method: :post do %>
-            <i class="fa-regular fa-heart fa-lg" style="color:red;"></i>
-            <%= t.likes.count %>
+          <%= button_to post_likes_path(id: t.id, post_id: t.id), method: :post, :class=>"heart" do %>
+            <i class="fa-regular fa-heart" style="color:red;"></i>
+            <p><%= t.likes.count %></p>
           <% end %>
+        <% end %>
+        <%= link_to post_path(t.id) do %> 
+            <div class="comment">
+              <i class="fa-regular fa-comment"></i>
+              <p><%= t.comments.count %></p>
+            </div>
         <% end %>
       <% end %>
     </div>
-    <br>
+    </div>
   <% end %>
-
 </div>
 </body>

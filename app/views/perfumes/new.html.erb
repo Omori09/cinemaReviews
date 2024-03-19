@@ -1,8 +1,10 @@
+<body class="perfumes">
 <%= form_with model:@perfume, local: true do |f| %>
   <div class="container-sindan">
     <div class="row">
       <div class="col-12">
-        <p>Question1. 誰と見にいきますか？</p>
+        <br>
+        <h3>Question1. 誰と見にいきますか？</h3>
       </div>
       <div class="col-6">
         <%= f.radio_button :question1, "1" %><%= f.label :question1_1, "一人で" %>
@@ -15,8 +17,9 @@
       </div>
     </div>
 
+    <br>
     <div class="col-12">
-      <p>Question2. 希望はどの辺り？</p>
+      <h3>Question2. 希望はどの辺り？</h3>
     </div>
     <div class="col-6">
       <%= f.radio_button :question2, "1" %><%= f.label :question2_1, "東京" %>
@@ -29,8 +32,10 @@
     </div>
   </div>
 
+  <br>
   <div class="sindanbotan">
-    <%= f.submit "診断する！" %>
-  </div>
-  <%= link_to "前ページへ戻る", perfumes_path, class: "link" %>
+    <%= f.submit "診断する！", :class=>"btn" %>
+  </div><br>
+  <%= link_to "前ページへ戻る", perfumes_path, :class=>"perfume_link" %>
 <% end %>
+</body>

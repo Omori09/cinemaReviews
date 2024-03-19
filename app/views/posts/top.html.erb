@@ -16,24 +16,22 @@
   <body class="top">
     <div class="center">
       <img src="/assets/top1.jpg" class="img2" id="topimg">
-      <span>
-        <h4>映画"館"を探せるレビューサイト</h4>
+      <span class="big">
+        <h3>映画"館"を探せるレビューサイト</h3>
         <h1 class="title">cinema reviews</h1>
       </span>
     </div>
-
-    <br><br>
-    <h2 class="black">あれ？</h2><br>
+    <h2>あれ？</h2>
     <ul class="container">
-      <li>友達と遊びに来たけど<br>映画館以外の施設が<br>無さすぎる</li>
-      <li>どこの売店も<br>ポップコーン<br>ばっかり</li>
-      <li>座席が硬くて<br>映画に集中<br>できない</li>
+    <li>ポップコーンの種類が少ない</li>
+      <li>座席が硬くて疲れてしまう</li>
+      <li>映画館周りに遊べる施設が足りない</li>
     </ul>
 
     <h2 class="black">そんな「映画館」に関するお悩み<br>感じたことはありませんか？</h2>
 
     <div class="center">
-      <img src="/assets/top2.jpg" class="img2">
+      <img src="/assets/watching.gif" class="img2">
       <span><h1>ここは<br>映画館の情報を<br>探せるサイト</h1></span>
     </div>
 
@@ -45,12 +43,14 @@
           <li class="term">立地</li>
           <li class="term">観たい映画</li>
         </ul>
+        <div class="fuwafuwa">
         <img src="/assets/fukidashi1.png" id="fukidashi">
-        <h2 class="red">条件にぴったりの映画館を<br>見つけよう！</h2>
+        <h2>条件にぴったりの映画館を<br>見つけよう！</h2>
+        </div>
       </span>
-    </div>
 
-    <h3><%= link_to "みんなのレビューを見る", posts_path %></h3>
-
+    <%= link_to posts_path, :class=>"perfume_link" do %>
+      <h3>みんなのレビューを見る！<i class="fa-solid fa-arrow-right"></i></h3>
+    <% end %>
   </body>
 </html>

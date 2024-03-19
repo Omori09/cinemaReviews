@@ -1,5 +1,5 @@
 <body class="user">
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>ユーザー情報更新<% resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
@@ -7,37 +7,36 @@
   <!--アカウント編集時に名前を入力できるようにフォームを追加-->
   <div class="field">
     <%= f.label :ユーザーネーム %><br>
-    <%= f.text_field :name, value: @user.name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, value: @user.name, autofocus: true, :class=>"pen", autocomplete: "name" %>
     <i class="fa-solid fa-pen fa-lg"></i>
   </div>
 
   <div class="field">
-    <%= image_tag @user.image_url, size: "15%" if @user.image? %>
+    <%= image_tag @user.image_url, width: "50px" if @user.image? %>
     <%= f.file_field :image %>
   </div>
 
   <!--アカウント編集時にプロフィールを入力できるようにフォームを追加-->
   <div class="field">
     <%= f.label :自己紹介 %><br>
-    <%= f.text_area :profile, value: @user.profile, autofocus: true %>
+    <%= f.text_area :profile, value: @user.profile, :class=>"pen", autofocus: true %>
     <i class="fa-solid fa-pen fa-lg"></i>
   </div>
 
   <div class="field">
     <%= f.label :メールアドレス %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, :class=>"pen", autocomplete: "email" %>
     <i class="fa-solid fa-pen fa-lg"></i>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <% end %><br>
 
-  <br>
   <div class="field">
-    <p>パスワードの更新</p>
+    <h3>パスワードを更新しますか？</h3>
     <%= f.label :新しいパスワード %> <br>
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, :class=>"pen", autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br>
       <em>※<%= @minimum_password_length %>文字以上</em>
@@ -46,19 +45,19 @@
 
   <div class="field">
     <%= f.label :新しいパスワード %><i>(再入力)</i><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, :class=>"pen", autocomplete: "new-password" %>
   </div>
 
   <br>
   <div class="field">
     <%= f.label :現在のパスワードを入力 %> <br>
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password, :class=>"pen", autocomplete: "current-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "更新" %>
+  <%= f.button '更新', type: 'button', onclick: 'submit();', :class=>"btn" %>
   </div>
 <% end %>
 
-<%= link_to "マイページへ", user_path(current_user.id) %>
+<%= link_to "マイページへ", user_path(current_user.id), :class=>"link" %>
 </body>

@@ -1,3 +1,119 @@
 // Place all the styles related to the perfumes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.perfumes {
+  background-image: url("filmreel.gif");
+  background-size: cover;
+  text-align: center;
+}
+
+.perfumes h3 {
+  font-family: 'Mochiy Pop One', sans-serif;
+  text-shadow: 0px 3px 0px white;
+}
+
+.perfume_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.col-6 {
+  margin-top: 7px;
+}
+
+.shine {
+  position: relative;
+  /*ボタンの形状*/
+  display: inline-block;
+  background: black;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+}
+
+.shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 100%);
+  transform: skewX(-25deg);
+}
+
+.shine:hover::before {
+  animation: shine 0.7s;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+
+
+//resultページ
+.perfumes_result {
+  background-image: url("perfumes_background.jpg");
+  background-size: cover;
+  text-align: center;
+}
+
+.perfumes_result h4 {
+  font-family: 'Mochiy Pop One', sans-serif;
+  text-shadow: 3px 3px 3px white,
+    3px -3px 3px white,
+    -3px 3px 3px white,
+    -3px -3px 3px white;
+}
+
+.result {
+  margin-top: 15px;
+}
+
+.result-container p {
+  margin: 15px;
+  color: white;
+  text-shadow: 2px 2px 5px red,
+    -2px 2px 5px red,
+    2px -2px 5px red,
+    -2px -2px 5px red;
+}
+
+.jump {
+  font-family: 'Mochiy Pop One', sans-serif;
+  background-color: white;
+  border: none;
+  color: red;
+  padding: 5px;
+  text-shadow: none;
+  text-decoration: none;
+}
+
+.jump::after {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent red;
+}
+
+.jump:hover {
+  background-color: red;
+  border: none;
+  color: white;
+}
+
+.perfume_link {
+  font-family: 'Noto Sans JP', sans-serif;
+}

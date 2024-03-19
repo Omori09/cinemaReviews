@@ -9,6 +9,11 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%# フォント %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Mochiy+Pop+One&family=Noto+Sans+JP&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -23,7 +28,7 @@
             <li><%= link_to "Top", root_path %></li>
             <li><%= link_to "投稿一覧", posts_path %></li>
             <li><%= link_to "新規投稿", new_post_path %></li>
-            <li><%= link_to "映画館診断", new_perfume_path %></li>
+            <li><%= link_to "映画館診断", perfumes_path %></li>
             <li>
             <% if user_signed_in? %>
               <li>
@@ -40,6 +45,19 @@
     </header>
       
     <main>
+    <div class="loading">
+      <div class="loading-wrap">
+        <%= image_tag "eishakigif.gif" %>
+      </div>
+    </div>
+    <script>
+      const loading = document.querySelector('.loading');
+      window.addEventListener('load', () => {
+        setTimeout(function() {
+          loading.classList.add('hide');
+        }, 1000);
+      });
+    </script>
       <%= yield %>
     </main>
 </body>

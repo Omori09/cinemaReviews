@@ -12,8 +12,7 @@
 
 .img2 {
   opacity: 0.7;
-  width: 640px;
-  height: 427px;
+  width: 100vw;
   vertical-align: bottom;
 }
 
@@ -24,6 +23,12 @@
 
 .title {
   font-size: 300%;
+  font-family: 'Noto Sans Mono', monospace;
+  line-height: 150%;
+}
+
+.big {
+  font-size: 2.5vw;
 }
 
 .center {
@@ -32,11 +37,17 @@
 
 .center span {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
   text-shadow: 1px 2px 3px #4c4c4c;
+}
+
+.top h2 {
+  color: #4c4c4c;
+  text-shadow: none;
+
 }
 
 .container {
@@ -44,12 +55,49 @@
   justify-content: center;
 }
 
-li {
+@keyframes poyopoyo {
+
+  0% {
+    transform: scale(1.0);
+  }
+
+  40% {
+    transform: scale(1.0);
+  }
+
+  60% {
+    transform: scale(1.0);
+  }
+
+  80% {
+    transform: scale(1.0);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  70% {
+    transform: scale(0.95);
+  }
+}
+
+.container ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container li {
   list-style: none;
   border: none;
   border-radius: 20px;
-  padding: 10px;
-  background: white;
+  background: #ffe180;
+  color: #4c4c4c;
+  text-align: center;
+  margin: 10px;
+  padding: 0 36px 0 35px;
+  animation: poyopoyo 2.5s infinite;
+  opacity: 1;
 }
 
 #fukidashi img {
@@ -57,6 +105,28 @@ li {
   z-index: 30;
   opacity: 1.0;
 
+}
+
+.fuwafuwa {
+  animation: fuwafuwa 3s ease-in-out infinite alternate;
+  display: inline-block;
+  transition: 1.5s ease-in-out;
+}
+
+.fuwafuwa h2 {
+  position: absolute;
+  top: 30%;
+  left: 22%
+}
+
+@keyframes fuwafuwa {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(0, -10px) rotate(0deg);
+  }
 }
 
 .term {
@@ -70,17 +140,8 @@ li {
   top: 5px;
 }
 
-.black {
-  color: #4c4c4c;
-  text-shadow: none;
-}
-
-.red {
-  color: red;
-  position: absolute;
-  left: 22%;
-  top: 41%;
-  text-shadow: none;
+.top h3 {
+  margin: 10px;
 }
 
 
@@ -114,18 +175,15 @@ li {
   outline: none;
   /*アニメーションの指定*/
   transition: all 0.2s ease;
-}
-
-.no-underline {
-  text-decoration: none;
-  color: red;
+  z-index: 3;
 }
 
 .btnLike:hover {
   border-color: transparent;
 }
 
-.btnLike span {
+.no-underline {
+  font-family: 'Noto Sans Mono', monospace;
   position: relative;
   z-index: 2;
   /*z-indexの数値をあげて文字を背景よりも手前に表示*/
@@ -134,9 +192,11 @@ li {
   padding: 10px 30px;
   background: #fff;
   border-radius: 25px;
-  color: #4c4c4c;
+  color: #7fbfff;
   /*アニメーションの指定*/
   transition: all 0.3s ease;
+  text-decoration: none;
+  color: #7fbfff;
 }
 
 .pushdown:before {
@@ -150,22 +210,37 @@ li {
   width: 100%;
   height: 100%;
   border-radius: 25px;
-  background-color: #4c4c4c;
+  background-color: #7fbfff;
 }
 
-/*hoverの際にY軸に4pxずらす*/
-.pushdown:hover span {
-  background-color: #4c4c4c;
+.no-underline:hover {
+  font-family: 'Noto Sans Mono', monospace;
+  background-color: #7fbfff;
   color: #fff;
   transform: translateY(4px);
 }
 
+.srcbg {
+  background-color: #ffe180;
+  display: flex;
+  padding-top: 30px;
+  margin-top: -123px;
+}
+
+.index .title {
+  font-family: 'cinecaption226';
+  text-align: left;
+  margin-left: 25px;
+  font-size: 250%;
+}
+
 
 .search {
+  left: 100%;
   position: relative;
+  transform: translateX(-175%);
   display: flex;
-  margin-bottom: 20px;
-  justify-content: center;
+  padding: 10px;
 }
 
 .srcbox {
@@ -175,6 +250,7 @@ li {
   outline: 0;
   background: white;
   border: none;
+  font-family: 'Noto Sans Mono';
 }
 
 .srcbtn {
@@ -191,12 +267,178 @@ li {
 }
 
 .posts-container {
-  padding: 2em;
+  padding: 2px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .post {
-  border: 2px solid #4c4c4c;
+  text-align: center;
+  justify-content: center;
+  border: 4px solid #000000;
   margin: 10px;
-  background-image: "post.jpg";
+  padding: 0 36px 0 35px;
+  width: 290px;
+  background-color: white;
+  background-image: url(post.jpg);
+  background-size: contain;
+}
+
+.theater {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.about {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin: 0 25px;
+}
+
+.reaction {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.heart {
+  display: inline-block;
+  position: relative;
+  width: 4em;
+  height: 4em;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  margin: 0 20px;
+  margin-top: 6px;
+}
+
+.heart i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+}
+
+.heart p {
+  font-size: 150%;
+  position: relative;
+}
+
+.comment {
+  display: inline-block;
+  position: relative;
+  width: 4em;
+  height: 4em;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  margin-left: 2px;
+  margin: 0 20px;
+  color: black;
+}
+
+.comment i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+}
+
+.comment p {
+  font-size: 150%;
+  position: relative;
+}
+
+
+//newページ
+.new {
+  text-align: center;
+  background-image: url(new_background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  line-height: 2.5;
+  color: white;
+}
+
+.new h3 {
+  font-family: 'Noto Sans Mono';
+  font-size: 150%;
+  color: black;
+}
+
+//showページ
+.show {
+  text-align: center;
+  background-image: url(new_background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  line-height: 2.5;
+}
+
+.show h3 {
+  font-family: 'Noto Sans Mono', monospace;
+}
+
+.show-wrapper {
+  padding: 0 10%;
+  margin: 0 10vw;
+  font-weight: bold;
+  background-image: url("post.jpg");
+  background-size: contain;
+  border-radius: 10px;
+  justify-content: center;
+  border: 4px solid #000000;
+  min-width: 300px;
+}
+
+.show .comment i {
+  font-size: 2.5em;
+}
+
+.show ul {
+  padding: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.show li {
+  margin: 0 10px;
+}
+
+.comment-wrapper {
+  text-align: left;
+  position: relative;
+  padding: 1rem;
+  margin: 5px;
+}
+
+.fukidashi {
+  position: relative;
+  border: 3px solid black;
+  border-radius: 10px;
+  margin-top: 3px;
+  padding: 10px;
+}
+
+.fukidashi:before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 20px;
+  margin-left: -15px;
+  margin-top: -30px;
+  border: 15px solid transparent;
+  border-bottom: 15px solid black;
 }

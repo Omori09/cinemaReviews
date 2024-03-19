@@ -1,34 +1,50 @@
-<body>
-<h1>ユーザーページ</h1>
-<%= image_tag @user.image_url, size: "250x200" if @user.image? %>
-<h3><%= @user.name %></h3>
-<% if current_user.id == @user.id %>
-  <p>メールアドレス : <%= @user.email %></p>
-<% end %>
-<p>プロフィール : <%= @user.profile %></p>
+<body class="profile">
+<h1 class="title">USER PAGE</h1>
+<div class="basicInfo">
+  <% if @user.image? %>
+    <%= image_tag @user.image_url, :class=>"prfImg"%> 
+  <% else %>
+    <img src="/assets/noimage.png" class="prfImg">
+  <% end %>
+
+  <div class="basicTxt">
+    <h3 class="name"><%= @user.name %></h3>
+    <% if current_user.id == @user.id %>
+      <p><%= @user.email %></p>
+    <% end %>
+  </div>
+</div>
+<div class="prfInf">
+  <p>プロフィール</p>
+  <%= @user.profile %>
+</div>
 
 <% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path %>
+  <%= link_to "編集する", edit_user_registration_path, :class=>"btn" %>
 <% end %>
 
+<br>
 <h2>投稿一覧</h2>
+<div class="myposts-container">
 <% @user.posts.each do |t| %>
-  <%= t.name %>
-  <%= t.title %>
-  <%= t.about %>
-  <br>
+<div class="mypost">
+  <p><i class="fa-solid fa-location-dot fa-lg" style=" color:red"></i><%= t.name %></p>
+  <p><%= t.about %></p>
+  <%= link_to "もっと見る", post_path(t.id) %>
+</div>
 <% end %>
+</div>
 
 <h2>いいね一覧</h2>
+<div class="myposts-container">
 <% @user.liked_posts.each do |t| %>
-<div>
-  <%= t.user.name %>
-  <%= t.name %>
-  <%= t.title %>
-  <%= t.about %>
-  <%= link_to "詳細へ", post_path(t.id) %>
-  </div>
+<div class="mypost">
+  <p><i class="fa-solid fa-location-dot fa-lg" style=" color:red"></i><%= t.name %></p>
+  <p><%= t.about %></p>
+  <%= link_to "もっと見る", post_path(t.id) %>
+</div>
 <% end %>
+</div>
 
-<p><%= link_to "映画館一覧に戻る", posts_path %></p>
+<p class="prflink"><%= link_to "映画館一覧に戻る", posts_path, :class=>"link" %></p>
 </body>

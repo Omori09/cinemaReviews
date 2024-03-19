@@ -13,23 +13,32 @@
  *= require_tree .
  *= require_self
  */
+@font-face {
+  font-family: 'cinecaption226';
+  src: url('assets/fonts/cinecaption226.ttf');
+}
+
 * {
   padding: 0px;
   margin: 0px;
+  font-family: 'cinecaption226';
 }
 
 header {
   height: 55px;
   padding: 10px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: 'Noto Sans Mono', monospace;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   background-color: rgba(230, 229, 229, 0.915);
   z-index: 300;
+  color: #333;
 }
 
 main {
@@ -154,4 +163,35 @@ main {
   left: 18px;
   transform: translateY(-6px) rotate(45deg);
   width: 30%;
+}
+
+.loading {
+  position: fixed;
+  z-index: 290;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  background-color: #a76e30;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms;
+}
+
+.loading-wrap {
+  position: relative;
+  margin: auto;
+  height: -45px;
+  left: 5%;
+}
+
+.loading-wrap img {
+  width: 50%;
 }

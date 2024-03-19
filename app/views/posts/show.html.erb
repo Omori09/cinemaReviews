@@ -1,11 +1,13 @@
-<body onload="initMap(), codeAddress()">
+<body onload="initMap(), codeAddress()" class="show">
 <h3>感想詳細</h3>
-<div class="post">
-  <p><%= link_to @post.user.name, user_path(@post.user.id) %>さん</p>
+<div class="show-wrapper">
+<div class="post-wrapper">
+<%= link_to user_path(@post.user.id), :class=>"name" do %>
+<%= @post.user.name %>さん
+<% end %>
   <p><%= @post.created_at %></p>
-  <h1 style="color: red;"><%= @post.name %></h1>
-  <h4><%= @post.title %></h4>
-  <p>ジャンル：<%= @post.genre %></p>
+  <h1 style="color: red;" class="title"><%= @post.name %></h1>
+  <h4><i class="fa-solid fa-clapperboard"></i> <%= @post.title %> (<%= @post.genre %>)</h4>
 
   <input type="hidden" id="address" value="<%= @post.name %>">
     <div id='map'></div>
@@ -13,6 +15,7 @@
       #map {
         height: 300px;
         width: 300px;
+        margin:0 auto;
       }
     </style>
     <script></script>
@@ -27,46 +30,52 @@
   <p><%= @post.about %></p>
   <%= image_tag @post.image_url, size: "250x200" if @post.image? %>
 
+    <div class="reaction">
     <% if user_signed_in? %>
       <% if current_user.id == @post.user_id%>
         <%= button_to "投稿を削除する", post_path(@post.id), method: :delete %>
       <% end %>
       <% if current_user.already_liked?(@post) %>
-        <%= button_to post_like_path(@post), method: :delete do %>
+        <%= button_to post_like_path(@post), method: :delete, :class=>"heart" do %>
           <i class="fas fa-heart fa-3x" style="color:red;"></i>
-          <%= @post.likes.count %>
+          <p><%= @post.likes.count %></p>
         <% end %>
       <% else %>
-        <%= button_to post_likes_path(@post), method: :post do %>
+        <%= button_to post_likes_path(@post), method: :post, :class=>"heart" do %>
         <i class="fa-regular fa-heart fa-3x" style="color:red;"></i>
-          <%= @post.likes.count %>
+          <p><%= @post.likes.count %></p>
         <% end %>
       <% end %>
-      <i class="fa-regular fa-comment fa-3x"></i>
-      <%= @post.comments.count %>
+      <div class="comment">
+        <i class="fa-regular fa-comment fa-3x"></i>
+        <p><%= @post.comments.count %></p>
+      </div>
     <% end %>
-</div>
+      </div>
 
 <div class="comment-wrapper">
   <% @comments.each do |c| %>
     <div>
-      <p><%= c.user.name %>さん <%= c.created_at %></p>
-      <%= c.content %>
+    <%= link_to user_path(c.user.id), :class=>"name" do %>
+      <p><%= c.user.name %>さん
+    <% end %> <%= c.created_at %></p>
+    <div class="fukidashi"><%= c.content %></div>
     </div>
-      <br>
   <% end %>
+  </div>
 
   <% if user_signed_in? %>
     <%= form_with(model: [@post, @comment], local: true) do |f| %>
-      <%= f.text_area :content %>
+      <%= f.text_area :content, :class=>"pen" %>
       <%= button_tag type: "submit" do %>
         <i class="far fa-comments"></i> コメントする
       <% end %>
     <% end %>
   <% end %>
+  </div>
 </div>
 
-<%= link_to "映画館一覧に戻る", posts_path %>
+<%= link_to "映画館一覧に戻る", posts_path, :class=>"link" %>
 </body>
 
 
@@ -119,7 +128,7 @@ function codeAddress(){
             document.getElementById('lng').value = ev.latLng.lng();
         });
     } else {
-      alert('該当する結果がありませんでした：' + status);
+      alert('位置情報が取得できませんでした：' + status);
     }
   });   
 }

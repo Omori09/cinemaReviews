@@ -1,14 +1,13 @@
-<body onload="initMap(), codeAddress()">
+<body onload="initMap(), codeAddress()" class="perfumes_result">
 <div class="intoro">
-  <h5>診断結果</h5>
-  <p>あなたにおすすめの映画館は……</p>
+  <br>
+  <h4>あなたにおすすめの映画館は……</h4><br>
 </div>
-<div class="post-container">
-    <div class="post">
-      <input type="hidden" id="address" value="仮">
+<div class="result-container">
+  <input type="hidden" id="address" value="仮">
+    <div class="result">
       <% if @perfume.question1 == "1" && @perfume.question2 == "1" %>
-      <span>
-        <a href="https://www.nfaj.go.jp/"><h2>国立映画アーカイブ</h2></a>
+        <h2><a href="https://www.nfaj.go.jp/" target="_blank" class="jump" >国立映画アーカイブ <i class="fa-solid fa-arrow-up-right-from-square"></i></h2></a>
         <script>
             var address = document.getElementById("address");
             address.value = "国立映画アーカイブ";
@@ -16,92 +15,110 @@
           <p>日本で唯一の国立映画専門機関</p>
           <p>名作をお手頃価格で観られる</p>
         </ul>
-      </span>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "1" && @perfume.question2 == "2" %>
-        <h2><a href="https://atsuginoeigakan-kiki.com/">あつぎのえいがかんkiki</a></h2>
+        <h2><a href="https://atsuginoeigakan-kiki.com/" target="_blank" class="jump" >あつぎのえいがかんkiki <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
             address.value = "あつぎのえいがかんkiki";
         </script>
         <p>上映する映画を選ぶセンスが抜群</p>
         <p>上映頻度が高い</p>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "1" && @perfume.question2 == "3" %>
-        <h2><a href="https://tjoy.jp/t-joy_soga">T・ジョイ蘇我</a></h2>
+        <h2><a href="https://tjoy.jp/t-joy_soga" target="_blank" class="jump" >T・ジョイ蘇我 <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
             address.value = "T・ジョイ蘇我";
         </script>
         <p>魅力的なプライベートルームが存在</p>
         <p>無料シャトルバスで行けるので映画以外の出費が抑えられる</p>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "2" && @perfume.question2 == "1" %>
-        <h2><a href="https://109cinemas.net/grandberrypark/">109シネマズ グランベリーパーク</a></h2>
+        <h2><a href="https://109cinemas.net/grandberrypark/" target="_blank" class="jump" >109シネマズ グランベリーパーク <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
             address.value = "109シネマズ グランベリーパーク";
         </script>
         <p>都内最大級のアウトレット複合施設内の映画館</p>
         <p>映画チケットで施設の割引も</p>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "2" && @perfume.question2 == "2" %>
-        <h2><a href="https://cinecitta.co.jp/">チネチッタ</a></h2>
+        <h2><a href="https://cinecitta.co.jp/" target="_blank" class="jump" >チネチッタ <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
             address.value = "チネチッタ";
         </script>
         <p>イタリアのヒルタウンをモチーフに作られたエンタテイメントの街「ラ チッタデッラ」の一角</p>
         <p>購入できる飲食物のレパートリーが多い</p>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "2" && @perfume.question2 == "3" %>
-        <h2><a href="https://cinemacity.co.jp/">立川シネマシティ</a></h2>
+        <h2><a href="https://cinemacity.co.jp/" target="_blank" class="jump" >立川シネマシティ <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
             address.value = "立川シネマシティ";
         </script>
         <p>チャレンジ精神旺盛な映画館</p>
         <p>周辺にはおしゃれなお店が立ち並ぶ</p>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "3" && @perfume.question2 == "1" %>
-        <h2><a href="https://hlo.tohotheater.jp/net/schedule/043/TNPI2000J01.do">TOHOシネマズ 渋谷</a></h2>
+        <h2><a href="https://hlo.tohotheater.jp/net/schedule/043/TNPI2000J01.do" target="_blank" class="jump" >TOHOシネマズ 渋谷 <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
             address.value = "TOHOシネマズ 渋谷";
         </script>
         <p>駐車場有のため都会でも快適</p>
         <p>チェーン店なので映画のラインナップが豊富</p>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "3" && @perfume.question2 == "2" %>
-        <h2><a href="https://hlo.tohotheater.jp/net/schedule/036/TNPI2000J01.do">TOHOシネマズ ららぽーと横浜</a></h2>
+        <h2><a href="https://hlo.tohotheater.jp/net/schedule/036/TNPI2000J01.do" target="_blank" class="jump" >TOHOシネマズ ららぽーと横浜 <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
             address.value = "TOHOシネマズ ららぽーと横浜";
         </script>
         <p>家族に人気の商業施設内にある</p>
         <p>上映前の待ち時間は入り口すぐのガチャガチャで楽しめる</p>
+    </div>
 
+    <div class="result">
       <% elsif @perfume.question1 == "3" && @perfume.question2 == "3" %>
-        <h2><a href="https://www.ct-21.jp/">ネティアラ21</a></h2>
+        <h2><a href="https://www.ct-21.jp/" target="_blank" class="jump" >シネティアラ21 <i class="fa-solid fa-arrow-up-right-from-square"></i></a></h2>
         <script>
             var address = document.getElementById("address");
-            address.value = "ネティアラ21";
+            address.value = "シネティアラ21";
         </script>
         <p>駅近でアクセスが良い</p>
         <p>全席ワイドシートで目に優しいスクリーン</p>
       <% end %>
+    </div><br>
 
-      <p>アクセス</p>
+      <h4>アクセス</h4>
       <div id='map'></div>
         <style>
           #map {
             height: 300px;
             width: 300px;
+            margin:0 auto;
           }
         </style>
       </div>
-
-      <%= link_to "もう一度診断する！", new_perfume_path, class: "link" %>
+      <br>
+      <%= link_to "もう一度診断する！", new_perfume_path, :class=>"btn" %>
+      <br><br>
 </div>
 </body>
 
