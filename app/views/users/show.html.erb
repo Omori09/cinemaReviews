@@ -1,3 +1,19 @@
+  <div class="loading">
+      <div class="loading-wrap">
+      <p>クリックで続行</p>
+        <%= image_tag "eishakigif.gif" %>
+      </div>
+    </div>
+    <script>
+      const loading = document.querySelector('.loading');
+      window.addEventListener('click', () => {
+        setTimeout(function() {
+          loading.classList.add('hide');
+        }, 1000);
+      });
+    </script>
+
+
 <body class="profile">
 <h1 class="title">USER PAGE</h1>
 <div class="basicInfo">

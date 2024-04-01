@@ -63,6 +63,7 @@
   background-image: url("perfumes_background.jpg");
   background-size: cover;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .perfumes_result h4 {
@@ -116,4 +117,10 @@
 
 .perfume_link {
   font-family: 'Noto Sans JP', sans-serif;
+}
+
+iframe {
+  height: 300px;
+  width: 300px;
+  margin-top: 10px;
 }
