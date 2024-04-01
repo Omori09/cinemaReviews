@@ -7,17 +7,30 @@
 <div class="field">
 
 <%= f.hidden_field :name, html_options = {id: 'address'} %>
-<input id="address_temp" type="textbox" placeholder="映画館名を入力" class="pen">
-<input type="button" value="検索" class="pen" onclick="codeAddress(); register()">
+  <div class="mappppp">
+      <div class="kennsakumap">
+        <div class="field">
+          <input 
+          id="address_temp" 
+          type="textbox"
+          class="pen"
+          placeholder="映画館名を入力"
+          onkeyup="this.setAttribute('value', this.value);"
+          id="address"
+          value=""/>
+          <input type="button" value="検索" class="pen" onclick="codeAddress(); register()">
+        </div>
+      </div>
+  </div>
     
-    <div id='map'></div>
-    <style>
-    #map {
-        height: 300px;
-        width: 300px;
-        margin:0 auto;
-    }
-    </style>
+  <div id='map'></div>
+  <style>
+  #map {
+      height: 300px;
+      width: 300px;
+      margin:0 auto;
+  }
+  </style>
 </div>
 
 <div class="field">
@@ -73,74 +86,73 @@
   <%= f.label :映画館の画像 %>
   <%= f.file_field :image %>
 </div>
+<%= f.hidden_field :lat,:value =>"", id: :lat %>
+<%= f.hidden_field :lng,:value =>"", id: :lng %>
 
 <%= f.button '投稿する', type: 'button', onclick: 'submit();', :class=>"btn" %>
 <% end %>
-
 <%= link_to "映画館一覧に戻る", posts_path, :class=>"link" %>
 
-<script>
-//初期マップの設定
-let map
-let marker
-function initMap(){
-  geocoder = new google.maps.Geocoder()
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center:  {lat: 35.6803997, lng:139.7690174},  //東京
-    zoom: 15,
-    
-  });
-}
-
-//検索後のマップ作成
-let geocoder
-let aft
-function codeAddress(){
-  let inputAddress = document.getElementById('address_temp').value;
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-    if (status == 'OK') {
-        //マーカーが複数できないようにする
-        if (aft == true){
-            marker.setMap(null);
-        }
-
-        //新しくマーカーを作成する
-        map.setCenter(results[0].geometry.location);
-            marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location,
-            draggable: true	// ドラッグ可能にする
-        });
-
-        //二度目以降か判断
-        aft = true
-
-        //検索した時に緯度経度を入力する
-        document.getElementById('lat').value = results[0].geometry.location.lat();
-        document.getElementById('lng').value = results[0].geometry.location.lng();
-
-        // マーカーのドロップ（ドラッグ終了）時のイベント
-        google.maps.event.addListener( marker, 'dragend', function(ev){
-            // イベントの引数evの、プロパティ.latLngが緯度経度
-            document.getElementById('lat').value = ev.latLng.lat();
-            document.getElementById('lng').value = ev.latLng.lng();
-        });
-    } else {
-      alert('該当する結果がありませんでした：' + status);
-    }
-  });   
-}
-
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVvcvg1ms6uYh2j5-atzKZw4omelXeOlM&callback=initMap" async defer></script>
 
 <script>
+  //初期マップの設定
+  let map
+  let marker
+  function initMap(){
+    geocoder = new google.maps.Geocoder()
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center:  {lat: 35.6803997, lng:139.7690174},  //東京
+      zoom: 15,
+      
+    });
+  }
+
+  //検索後のマップ作成
+  let geocoder
+  let aft
+  function codeAddress(){
+    let inputAddress = document.getElementById('address_temp').value;
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+      if (status == 'OK') {
+          //マーカーが複数できないようにする
+          if (aft == true){
+              marker.setMap(null);
+          }
+
+          //新しくマーカーを作成する
+          map.setCenter(results[0].geometry.location);
+              marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location,
+              draggable: true	// ドラッグ可能にする
+          });
+
+          //二度目以降か判断
+          aft = true
+
+          //検索した時に緯度経度を入力する
+          document.getElementById('lat').value = results[0].geometry.location.lat();
+          document.getElementById('lng').value = results[0].geometry.location.lng();
+
+          // マーカーのドロップ（ドラッグ終了）時のイベント
+          google.maps.event.addListener( marker, 'dragend', function(ev){
+              // イベントの引数evの、プロパティ.latLngが緯度経度
+              document.getElementById('lat').value = ev.latLng.lat();
+              document.getElementById('lng').value = ev.latLng.lng();
+          });
+      } else {
+        alert('該当する結果がありませんでした：' + status);
+      }
+    });   
+  }
   function register(){
     var map = document.getElementById("address_temp");
     var rails = document.getElementById("address");
-  rails.value = map.value;
+    rails.value = map.value;
   }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVvcvg1ms6uYh2j5-atzKZw4omelXeOlM&callback=initMap" async defer></script>
 
 </body>

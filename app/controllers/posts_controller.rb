@@ -3,14 +3,14 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
     if params[:search] == nil
-      @posts= Post.all
+      @posts= Post.all.order(created_at: :desc)
     elsif params[:search] == ''
-      @posts= Post.all
+      @posts= Post.all.order(created_at: :desc)
     else
       #部分検索
-      @posts = Post.where("about LIKE ? ",'%' + params[:search] + '%').or(Post.where("title LIKE ? ",'%' + params[:search] + '%')).or(Post.where("name LIKE ? ",'%' + params[:search] + '%'))
+      @posts = Post.where("about LIKE ? ",'%' + params[:search] + '%').or(Post.where("title LIKE ? ",'%' + params[:search] + '%')).or(Post.where("name LIKE ? ",'%' + params[:search] + '%')).order(created_at: :desc)
     end
   end
 
@@ -45,6 +45,6 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:name, :title, :about, :image, :genre, :seat, :volume, :clean, :shop)
+    params.require(:post).permit(:name, :title, :about, :image, :genre, :seat, :volume, :clean, :shop, :lat, :lng)
   end
 end
