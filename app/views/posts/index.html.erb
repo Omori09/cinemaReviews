@@ -3,7 +3,7 @@
 <div class="srcbg">
 <h1 class="title">みんなの投稿</h1>
 <h3 class="btnLike pushdown">
-<%= link_to new_post_path, :class=>"no-underline" do %>
+<%= link_to new_post_path, :class=>"no-underline" do data: {"turbolinks" => false} %>
   <i class="fa-solid fa-plus fa-lg fa-bounce" ></i>
   投稿
 <% end %>
@@ -31,7 +31,7 @@
       <h5><i class="fa-solid fa-clapperboard"></i> <%= t.title %></h5><h6><%= t.genre %></h6>
 
       <p class="about"><%= t.about %></p>
-      <%= link_to "もっと見る", post_path(t.id) %>
+      <%= link_to "もっと見る", post_path(t.id), data: {"turbolinks" => false} %>
 
       <div class="reaction">
       <% if user_signed_in? %>
